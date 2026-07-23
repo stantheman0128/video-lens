@@ -152,7 +152,7 @@ def backfill_file(path: pathlib.Path, dry_run: bool) -> bool:
         "filename": path.name,
     }
 
-    meta_block = f'{META_SCRIPT_START}{json.dumps(meta_obj, ensure_ascii=False)}</script>'
+    meta_block = f'{META_SCRIPT_START}{json.dumps(meta_obj, ensure_ascii=False).replace("</", "<\\/")}</script>'
     new_html = html.replace('</body>', f'{meta_block}\n</body>', 1)
 
     if new_html == html:
